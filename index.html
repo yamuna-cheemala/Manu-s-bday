@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Manu 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #f9a8d4, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .page-wrap {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 26px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
+      padding: 26px 20px 30px;
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 34px 40px 38px;
+      }
+    }
+
+    .float-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.2rem;
+      animation: float-up 9s linear infinite;
+      opacity: 0.25;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-120vh) translateX(40px);
+        opacity: 0;
+      }
+    }
+
+    .heart:nth-child(1) { left: 5%; bottom: -10%; }
+    .heart:nth-child(2) { left: 25%; bottom: -20%; animation-delay: 2s; }
+    .heart:nth-child(3) { left: 55%; bottom: -15%; animation-delay: 4s; }
+    .heart:nth-child(4) { left: 78%; bottom: -18%; animation-delay: 1s; }
+    .heart:nth-child(5) { left: 92%; bottom: -25%; animation-delay: 3s; }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ENVELOPE SCREEN */
+
+    .envelope-screen {
+      text-align: center;
+      padding: 24px 10px 14px;
+      animation: fade-in 0.8s ease-out;
+    }
+
+    .envelope-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+
+    .envelope-wrap {
+      display: inline-block;
+      position: relative;
+      margin: 0 auto 18px;
+    }
+
+    .envelope {
+      width: 260px;
+      height: 170px;
+      background: #fef2f2;
+      border-radius: 18px;
+      position: relative;
+      box-shadow: 0 15px 25px rgba(148, 27, 80, 0.35);
+      overflow: hidden;
+      border: 2px solid #fecaca;
+      cursor: pointer;
+    }
+
+    .envelope::before,
+    .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #fb7185, #f97316);
+      transform-origin: top;
+      transition: transform 0.7s ease;
+    }
+
+    .envelope::before {
+      clip-path: polygon(0 0, 100% 0, 50% 60%);
+    }
+
+    .envelope::after {
+      clip-path: polygon(0 0, 50% 60%, 0 100%);
+      opacity: 0.2;
+    }
+
+    .envelope-open .envelope::before {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-inner {
+      position: absolute;
+      inset: 18px 18px 12px;
+      background: #fff;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    .envelope-to {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .envelope-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #e11d48;
+    }
+
+    .envelope-footer-text {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ec4899, #f97316);
+      color: white;
+      box-shadow: 0 10px 18px rgba(180, 83, 9, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 14px 24px rgba(180, 83, 9, 0.5);
+      filter: brightness(1.03);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 6px 14px rgba(180, 83, 9, 0.35);
+    }
+
+    .tiny-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+
+    /* MAIN CONTENT */
+
+    .main-content {
+      animation: fade-in 0.7s ease-out;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .title-block h1 {
+      font-size: 2.1rem;
+      line-height: 1.2;
+      color: #0f172a;
+    }
+
+    .title-block h1 span {
+      color: #ec4899;
+    }
+
+    .title-block p {
+      margin-top: 6px;
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+
+    .tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px dashed #fb7185;
+      color: #9f1239;
+      background: #fff1f2;
+      white-space: nowrap;
+    }
+
+    .top-row {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    @media (min-width: 750px) {
+      .top-row {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .intro-text {
+      flex: 2;
+    }
+
+    .intro-text p {
+      font-size: 0.96rem;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #db2777;
+    }
+
+    .photo-side {
+      flex: 1.2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .photo-frame {
+      width: 170px;
+      height: 170px;
+      border-radius: 999px;
+      border: 4px solid #fecaca;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fef2f2;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 8px;
+      box-shadow: 0 12px 25px rgba(148, 27, 80, 0.5);
+    }
+
+    /* ⭐ Round Manu photo */
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+    }
+
+    .section {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .section-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title span {
+      font-size: 1.05rem;
+    }
+
+    .section p {
+      font-size: 0.95rem;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    /* SURPRISE CARDS FOR WISHES */
+
+    .wish-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (min-width: 720px) {
+      .wish-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .wish-card {
+      position: relative;
+      padding: 12px 10px 10px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #fee2e2, #f1f5f9);
+      box-shadow: 0 8px 18px rgba(148, 163, 184, 0.4);
+      border: 1px dashed #fecaca;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .wish-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(148, 163, 184, 0.55);
+      background: radial-gradient(circle at top, #fed7e2, #e0f2fe);
+    }
+
+    .wish-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .wish-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #9f1239;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wish-title span.emoji {
+      font-size: 1.2rem;
+    }
+
+    .wish-tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fef9c3;
+      color: #854d0e;
+      border: 1px solid #facc15;
+      white-space: nowrap;
+    }
+
+    .wish-closed-text {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .wish-inner {
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px dashed #fecaca;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .wish-card.opened .wish-inner {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    .wish-line {
+      font-size: 0.9rem;
+      color: #4b5563;
+      margin-bottom: 6px;
+    }
+
+    .play-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      color: #374151;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.5);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .play-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 14px rgba(148, 163, 184, 0.7);
+    }
+
+    .play-btn span.icon {
+      font-size: 1rem;
+    }
+
+    .wish-hint {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 8px;
+    }
+
+    /* BIG SURPRISE GIFT BOX */
+
+    .surprise-wrap {
+      margin-top: 18px;
+      text-align: center;
+      padding: 14px 12px 10px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, #fee2e2, #eff6ff);
+      border: 1px dashed #fecaca;
+    }
+
+    .surprise-label {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .gift-box-outer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .gift-box {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      cursor: pointer;
+      perspective: 700px;
+    }
+
+    /* Base of the box */
+    .gift-base {
+      position: absolute;
+      inset: 34px 14px 4px 14px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      border-radius: 16px;
+      box-shadow: 0 18px 26px rgba(180, 83, 9, 0.7);
+      overflow: hidden;
+    }
+
+    /* Lid of the box */
+    .gift-lid {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 10px;
+      height: 48px;
+      background: linear-gradient(135deg, #fb7185, #f97316);
+      border-radius: 14px;
+      box-shadow: 0 8px 14px rgba(180, 83, 9, 0.6);
+      transform-origin: center bottom;
+      transition: transform 0.45s ease, box-shadow 0.45s ease;
+    }
+
+    /* Ribbons */
+    .gift-ribbon-vert,
+    .gift-ribbon-horiz {
+      position: absolute;
+      background: rgba(254, 249, 195, 0.9);
+      transition: transform 0.45s ease, opacity 0.45s ease;
+    }
+
+    .gift-ribbon-vert {
+      width: 20px;
+      inset: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gift-ribbon-horiz {
+      height: 16px;
+      inset: 50% 0 auto 0;
+      transform: translateY(-50%);
+    }
+
+    .gift-bow {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.45s ease, opacity 0.45s ease;
+    }
+
+    .bow-part {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fef9c3;
+      box-shadow: 0 0 8px rgba(250, 204, 21, 0.7);
+    }
+
+    .bow-center {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: #fbbf24;
+    }
+
+    .gift-box-text {
+      position: absolute;
+      inset: 38px 18px 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff7ed;
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .gift-box-text span.big {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .gift-pulse {
+      position: absolute;
+      inset: 38px 18px 8px 18px;
+      border-radius: 20px;
+      border: 2px dashed rgba(254, 249, 195, 0.9);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(0.9); }
+      100% { opacity: 0; transform: scale(1.1); }
+    }
+
+    .gift-box.open .gift-lid {
+      transform: translateY(-30px) rotateX(70deg);
+      box-shadow: 0 18px 26px rgba(248, 250, 252, 0.7);
+    }
+
+    .gift-box.open .gift-ribbon-vert {
+      transform: translateX(-160%);
+      opacity: 0;
+    }
+
+    .gift-box.open .gift-ribbon-horiz {
+      transform: translateY(-50%) scaleX(0);
+      opacity: 0;
+    }
+
+    .gift-box.open .gift-bow {
+      transform: translateX(-50%) translateY(-18px) scale(0.7);
+      opacity: 0;
+    }
+
+    .gift-box.open .gift-pulse {
+      animation: pulse 0.7s ease-out 1;
+    }
+
+    .gift-box.open .gift-box-text span.big::after {
+      content: " 🎉";
+    }
+
+    .surprise-box-text {
+      margin-top: 12px;
+      padding: 10px 10px 8px;
+      border-radius: 16px;
+      background: #ffffffd9;
+      box-shadow: 0 10px 20px rgba(148, 163, 184, 0.6);
+      animation: fade-in 0.4s ease-out;
+    }
+
+    .surprise-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #b91c1c;
+      margin-bottom: 4px;
+    }
+
+    .surprise-text {
+      font-size: 0.94rem;
+      color: #4b5563;
+      margin-bottom: 4px;
+    }
+
+    /* Laptop image/emoji below surprise text – NO CROPPING */
+
+    .gift-image {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .gift-image-inner {
+      min-width: 140px;
+      max-width: 200px;
+      padding: 10px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #0f172a, #1f2937);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 22px rgba(15, 23, 42, 0.7);
+    }
+
+    .gift-image-inner span {
+      font-size: 2.2rem;
+      color: #e5e7eb;
+    }
+
+    /* If you use an actual image, it will fit inside nicely */
+    .gift-image-inner img {
+      max-width: 100%;
+      max-height: 80px;
+      object-fit: contain;  /* ⭐ no cropping, full laptop visible */
+      border-radius: 12px;
+      display: block;
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: #6b7280;
+      text-align: left;
+    }
+
+    .signature {
+      font-weight: 600;
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+  <div class="float-hearts">
+    <div class="heart">💖</div>
+    <div class="heart">✨</div>
+    <div class="heart">💝</div>
+    <div class="heart">🌸</div>
+    <div class="heart">🎈</div>
+  </div>
+
+  <div class="page-wrap">
+    <main class="card">
+
+      <!-- ENVELOPE FIRST SCREEN -->
+      <section id="envelopeScreen" class="envelope-screen">
+        <div class="envelope-label">A tiny letter, just for you</div>
+
+        <div class="envelope-wrap">
+          <div id="envelope" class="envelope">
+            <div class="envelope-inner">
+              <div class="envelope-to">To our cutest</div>
+              <div class="envelope-name">Manu 💌</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="envelope-footer-text">
+          Tap the envelope or the button to open your birthday world.
+        </div>
+
+        <button id="openLetterBtn" class="btn">
+          <span>Open birthday letter</span> <span>✨</span>
+        </button>
+
+        <div class="tiny-note">
+          (Love from mummy & Sahithi — your favourite headache-owners 🤭)
+        </div>
+      </section>
+
+      <!-- MAIN PAGE AFTER ENVELOPE -->
+      <section id="mainContent" class="main-content hidden">
+        <header class="header">
+          <div class="title-block">
+            <h1>Happy Birthday, <span>Manu</span> 🎉</h1>
+            <p>Today is just for you. Smile more, think less, enjoy everything.</p>
+          </div>
+          <div class="tag">
+            Our little bundle of joy 💖
+          </div>
+        </header>
+
+        <div class="top-row">
+          <div class="intro-text">
+            <p>
+              Dear <span class="highlight">Manu</span>,<br />
+              You make everything around you a bit softer and a lot more funny.
+              From your random jokes to your cute rants, you are pure comfort to us.
+              Official title: <span class="highlight">my favourite headache</span> 🤦‍♀️❤️  
+              We are so, so lucky that life gave us <span class="highlight">you</span>.
+            </p>
+          </div>
+
+          <div class="photo-side">
+            <div class="photo-frame">
+              <!-- ⭐ Manu's photo file
+                   Put image.png (or your chosen file) in the same folder as index.html -->
+              <img src="image.png" alt="Manu's photo" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SURPRISE 1: HIDDEN WISHES AS GIFTS -->
+        <section class="section">
+          <h3 class="section-title"><span>🎁</span> Open your mini surprise gifts</h3>
+          <p>
+            We hid our wishes inside tiny gift boxes. Open them one by one in any order you like.
+          </p>
+
+          <div class="wish-grid">
+            <!-- Mummy card -->
+            <div class="wish-card" data-audio="mummyAudio">
+              <div class="wish-card-header">
+                <div class="wish-title">
+                  <span class="emoji">🩷</span>
+                  <span>Mummy’s gift</span>
+                </div>
+                <div class="wish-tag">Tap to open</div>
+              </div>
+              <div class="wish-closed-text">
+                There is always extra love (and extra scolding) inside mummy’s box.
+              </div>
+              <div class="wish-inner">
+                <p class="wish-line">
+                  “For the little girl who will always be my baby, my worry, and my biggest proud moment.”
+                </p>
+                <button class="play-btn" type="button">
+                  <span class="icon">▶️</span>
+                  <span>Play mummy’s audio</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Akka card -->
+            <div class="wish-card" data-audio="akkaAudio">
+              <div class="wish-card-header">
+                <div class="wish-title">
+                  <span class="emoji">🌷</span>
+                  <span>Akka Sahithi’s gift</span>
+                </div>
+                <div class="wish-tag">Tap to open</div>
+              </div>
+              <div class="wish-closed-text">
+                Official role: Akka. Real role: owner of one giant headache called Manu.
+              </div>
+              <div class="wish-inner">
+                <p class="wish-line">
+                  “From your loudest supporter, secret admirer and the one who proudly calls you
+                  <span class="highlight">my favourite headache</span>.”
+                </p>
+                <button class="play-btn" type="button">
+                  <span class="icon">▶️</span>
+                  <span>Play akka’s audio</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="wish-hint">
+            Put your earphones, open one box at a time, and just feel hugged (and lightly roasted). 🫶
+          </div>
+
+          <!-- ⭐ AUDIO FILES SECTION -->
+          <!-- Place your audio files in the SAME folder as index.html -->
+          <!-- For example:
+               - mummy's recording  -> mummy-wish.mp3
+               - Sahithi's recording -> akka-wish.mp3
+               Then update the src values below if names are different. -->
+
+          <!-- Mummy audio -->
+          <audio id="mummyAudio" src="mummyaudio.mp3"></audio>
+
+          <!-- Akka (Sahithi) audio -->
+          <audio id="akkaAudio" src="sahithi.mp3"></audio>
+        </section>
+
+        <!-- SURPRISE 2: BIG GIFT BOX (LAPTOP REVEAL) -->
+        <section class="section">
+          <h3 class="section-title"><span>🎀</span> The big birthday surprise</h3>
+          <p>
+            Now that you opened all the small gifts, it’s time for the main one.
+            There is a big surprise hiding inside this box. Ready?
+          </p>
+
+          <div class="surprise-wrap">
+            <div class="surprise-label">Click the box to unwrap the ribbon and open it.</div>
+
+            <div class="gift-box-outer">
+              <div id="giftBox" class="gift-box">
+                <div class="gift-lid">
+                  <div class="gift-ribbon-vert"></div>
+                  <div class="gift-ribbon-horiz"></div>
+                  <div class="gift-bow">
+                    <div class="bow-part"></div>
+                    <div class="bow-center"></div>
+                    <div class="bow-part"></div>
+                  </div>
+                </div>
+
+                <div class="gift-base">
+                  <div class="gift-ribbon-vert"></div>
+                  <div class="gift-ribbon-horiz"></div>
+                </div>
+
+                <div class="gift-box-text">
+                  <span class="big">Click to open 🎁</span>
+                </div>
+
+                <div class="gift-pulse"></div>
+              </div>
+            </div>
+
+            <div id="laptopText" class="surprise-box-text hidden">
+              <div class="surprise-title">You deserve every good thing, Manu 💻💕</div>
+              <p class="surprise-text">
+                This year, we wanted to give you something that stays with you in every project,
+                every late-night study session and every new dream you chase.
+              </p>
+              <p class="surprise-text">
+                So your big birthday surprise is a <span class="highlight">brand new laptop</span> —
+                from mummy and Sahithi. Use it to learn, create, watch, laugh and build the future you want.
+              </p>
+
+              <!-- ⭐ LAPTOP VISUAL (NO CROPPING) -->
+              <div class="gift-image">
+                <div class="gift-image-inner">
+                  
+              
+                    
+                       <img src="WhatsApp Image 2025-11-30 at 11.42.46 PM.jpeg" alt="Laptop gift" />
+
+                  -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <div class="signature">With so much love,</div>
+          <div class="signature">Mummy & Sahithi 🫶</div>
+          <div>“My favourite headache, forever my favourite person.”</div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Envelope open -> show main content
+    const openBtn = document.getElementById("openLetterBtn");
+    const envelopeScreen = document.getElementById("envelopeScreen");
+    const mainContent = document.getElementById("mainContent");
+    const envelope = document.getElementById("envelope");
+
+    function openEnvelope() {
+      envelope.classList.add("envelope-open");
+      setTimeout(() => {
+        envelopeScreen.classList.add("hidden");
+        mainContent.classList.remove("hidden");
+      }, 650);
+    }
+
+    openBtn.addEventListener("click", openEnvelope);
+    envelope.addEventListener("click", openEnvelope);
+
+    // Audio play logic for surprise cards
+    const wishCards = document.querySelectorAll(".wish-card");
+    const audios = {
+      mummyAudio: document.getElementById("mummyAudio"),
+      akkaAudio: document.getElementById("akkaAudio")
+    };
+
+    function stopAllAudio() {
+      Object.values(audios).forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+      });
+    }
+
+    wishCards.forEach(card => {
+      const audioId = card.getAttribute("data-audio");
+      const playBtn = card.querySelector(".play-btn");
+
+      // Open card on click anywhere
+      card.addEventListener("click", () => {
+        if (!card.classList.contains("opened")) {
+          card.classList.add("opened");
+        }
+      });
+
+      // Play button inside card
+      playBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // so card click doesn't fire again
+        const audio = audios[audioId];
+        if (!audio) return;
+        stopAllAudio();
+        audio.play();
+      });
+    });
+
+    // Gift box animation + laptop text reveal
+    const giftBox = document.getElementById("giftBox");
+    const laptopText = document.getElementById("laptopText");
+
+    giftBox.addEventListener("click", () => {
+      const isOpen = giftBox.classList.contains("open");
+      if (!isOpen) {
+        giftBox.classList.add("open");
+        laptopText.classList.remove("hidden");
+      } else {
+        giftBox.classList.remove("open");
+        laptopText.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
